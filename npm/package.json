@@ -1,0 +1,17 @@
+{
+  "name": "dice_simulator",
+  "version": "1.0.0",
+  "description": "Dice simulator. Focus on npm, mocha and uglifyjs. ",
+  "scripts": {
+    "test":"mocha",
+    "uglify": "uglifyjs src/models/* src/frontned.js -m -c -o build/app.js",
+    "copy-files": "cp src/*.html build/ & cp src/*.css build/",
+    "build": "npm run copy-files && npm run uglify" 
+  },
+  "author": "Armend Azemi",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^10.0.0",
+    "uglify-js": "^3.16.3"
+  }
+}

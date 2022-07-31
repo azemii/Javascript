@@ -1,0 +1,18 @@
+extends layout.pug
+block style 
+    head
+        style
+            include style.css
+
+block content
+    section#content 
+        if friends
+        .row 
+            .column
+                h2 Last name
+                each val, key in friends
+                        p= val
+            .column
+                h2 First name 
+                each val,key in friends 
+                    p= key
