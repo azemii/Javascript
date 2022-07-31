@@ -24,12 +24,6 @@ router.post('/goodbye', (req, res) => {
     console.log('Cookie \'username\' cleared');
 });
 
-router.get('/cards', (req, res) => {
-    //* Another way to access dyamic values on our template.
-    // res.locals.prompt = 'Who is buried in a random tomb?'
-    res.render('card', {prompt: 'Who is buried in a random tomb?', hint: 'Looser'});
-});
-
 router.get('/hello', (req, res) => {
     const name = req.cookies.username
     if (name){

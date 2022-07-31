@@ -12,8 +12,12 @@ app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
-const routes = require('./routes');
-app.use(routes);
+// --- Routes ---
+const mainRoutes = require('./routes');
+const cardRoutes = require('./routes/cards');
+
+app.use(mainRoutes);
+app.use('/cards', cardRoutes);
 
 app.use((req, res, next) => {
     req.message = 'This message made it';
@@ -50,7 +54,7 @@ app.use((err, req, res, next) => {
     res.locals.error = err; 
     res.status(err.status);
     res.render('error');
-})
+});
 
 
 app.listen(3000, () => {
