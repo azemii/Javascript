@@ -12,6 +12,8 @@ app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
+const routes = require('./routes');
+app.use(routes);
 
 app.use((req, res, next) => {
     req.message = 'This message made it';
@@ -28,45 +30,6 @@ app.use((req, res, next) => {
     console.log('World');
     next();
 });
-
-app.get('/', (req, res) => {
-    const name = req.cookies.username
-    if (name){
-        res.render('index',{ name }); // Shorthand for {name: name}
-    }else {
-        res.redirect('/hello')
-    }
-});
-
-//* Used for singing out the user and clearing the cookies stored.
-//* Always redirect after a 'POST' to avoid x2 submissions.
-app.post('/goodbye', (req, res) => {
-    res.clearCookie('username');
-    res.redirect('/hello');
-    console.log('Cookie \'username\' cleared');
-});
-
-app.get('/cards', (req, res) => {
-    //* Another way to access dyamic values on our template.
-    // res.locals.prompt = 'Who is buried in a random tomb?'
-    res.render('card', {prompt: 'Who is buried in a random tomb?', hint: 'Looser'});
-});
-
-app.get('/hello', (req, res) => {
-    const name = req.cookies.username
-    if (name){
-        res.redirect('/');
-    }else {
-        res.render('hello');
-    }
-    
-});
-
-app.post('/hello', (req, res) => {
-    res.cookie('username', req.body.username);
-    res.redirect('/');
-});
-
 /*
 * Throws a 404 error when no route has matched a reqeust.
 * Should be placed at the end, after all routes have been defined. 
