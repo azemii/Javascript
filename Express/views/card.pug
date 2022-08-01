@@ -3,9 +3,9 @@ block content
     section#content 
       h2= text 
       if side === 'question'
-        a(href=`/cards/${id}/?side=answer`) Answer
+        a(href=`?side=answer`) Answer
       else 
-        a(href=`/cards/${id}/?side=question`) Question
+        a(href=`?side=question`) Question
       if hint 
         p 
           i Hint: #{hint}

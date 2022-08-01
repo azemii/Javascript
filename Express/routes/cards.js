@@ -6,6 +6,15 @@ const router = express.Router();
 const { data } = require('../data/flashCardData.json');
 const { cards } = data;
 
+
+//* If /cards get's request, provide a random card from the dataset.
+router.get('/', (req, res)=> { 
+    let max = cards.length;
+    let min = 1;
+
+    let randomCardID = Math.floor(Math.random() * (max - min) + min);
+    res.redirect(`/cards/${randomCardID}`);
+});
 /* 
 * Since all '/cards' routes are being directed into this file, we don't need
 * to specify router.get('/cards'), we can simply just use '/' instead.
@@ -13,9 +22,16 @@ const { cards } = data;
 router.get('/:id', (req, res) => {
     const { side } = req.query;
     const { id  } = req.params;
+
+    // If there is no side specified in the query, redirect to the question part of the card.
+    if (!side) {
+        res.redirect(`/cards/${id}?side=question`);
+    }
+
     const text = cards[id][side];
     const { hint } = cards[id];
-    const templateData = { text, side, id };
+    const templateData = { text, side };
+    console.log(side);
 
     // Only show hint when the question is showing.
     if (side === 'question') {
@@ -23,7 +39,6 @@ router.get('/:id', (req, res) => {
     }
     //* Another way to access dyamic values in our template.
     // res.locals.prompt = 'Who is buried in a random tomb?'
-    console.log(templateData);
     res.render('card', templateData);
 });
 
