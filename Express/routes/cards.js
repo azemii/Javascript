@@ -11,12 +11,19 @@ const { cards } = data;
 * to specify router.get('/cards'), we can simply just use '/' instead.
 */
 router.get('/:id', (req, res) => {
-    //* Another way to access dyamic values on our template.
+    const { side } = req.query;
+    const { id  } = req.params;
+    const text = cards[id][side];
+    const { hint } = cards[id];
+    const templateData = { text };
+    
+    // Only show hint when the question is showing.
+    if (side === 'question') {
+        templateData.hint = hint;
+    }
+    //* Another way to access dyamic values in our template.
     // res.locals.prompt = 'Who is buried in a random tomb?'
-    res.render('card', {
-        prompt: cards[req.params.id].question, 
-        hint: cards[req.params.id].hint
-    });
+    res.render('card', templateData);
 });
 
 module.exports = router;
