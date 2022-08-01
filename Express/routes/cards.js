@@ -15,14 +15,15 @@ router.get('/:id', (req, res) => {
     const { id  } = req.params;
     const text = cards[id][side];
     const { hint } = cards[id];
-    const templateData = { text };
-    
+    const templateData = { text, side, id };
+
     // Only show hint when the question is showing.
     if (side === 'question') {
         templateData.hint = hint;
     }
     //* Another way to access dyamic values in our template.
     // res.locals.prompt = 'Who is buried in a random tomb?'
+    console.log(templateData);
     res.render('card', templateData);
 });
 
