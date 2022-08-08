@@ -1,11 +1,20 @@
-extends layout.pug 
-block content
-    section#content 
-      h2= text 
-      if side === 'question'
-        a(href=`?side=answer`) Answer
-      else 
-        a(href=`?side=question`) Question
-      if hint 
-        p 
-          i Hint: #{hint}
+extends app
+
+block card
+  section.flashcards
+    .card(class=`card-${side}`)
+      .card-header
+      h1.card-title Question
+      #content
+        h2=text
+        if hint 
+          p.hint
+            i=hint
+      .card-flip-wrap
+        a(href=`${id}?side=${sideToShow}`)
+          img.card-flip(src='/static/img/flip.svg')
+      .card-next
+        a(href='/cards')
+          img(src='/static/img/next.svg')
+    script(src='/static/js/app.js')
+        

@@ -11,6 +11,7 @@ const { cards } = data;
 router.get('/', (req, res)=> { 
     let max = cards.length;
     let min = 1;
+    console.log('in cards no query');
 
     let randomCardID = Math.floor(Math.random() * (max - min) + min);
     res.redirect(`/cards/${randomCardID}`);
@@ -20,18 +21,20 @@ router.get('/', (req, res)=> {
 * to specify router.get('/cards'), we can simply just use '/' instead.
 */
 router.get('/:id', (req, res) => {
+    console.log('in cards');
     const { side } = req.query;
     const { id  } = req.params;
 
     // If there is no side specified in the query, redirect to the question part of the card.
     if (!side) {
-        res.redirect(`/cards/${id}?side=question`);
+        // Return to avoid rest of code executing, will result in HTTP_ERROR by node.
+        return res.redirect(`/cards/${id}?side=question`);
     }
-
+    console.log('here');
+    const name = req.cookies.username;
     const text = cards[id][side];
     const { hint } = cards[id];
-    const templateData = { text, side };
-    console.log(side);
+    const templateData = { text, side, name };
 
     // Only show hint when the question is showing.
     if (side === 'question') {
@@ -40,6 +43,7 @@ router.get('/:id', (req, res) => {
     //* Another way to access dyamic values in our template.
     // res.locals.prompt = 'Who is buried in a random tomb?'
     res.render('card', templateData);
+    console.log('over here');
 });
 
 module.exports = router;

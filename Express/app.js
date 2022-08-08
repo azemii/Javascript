@@ -11,6 +11,7 @@ app.set('view engine', 'pug');
 //* Middleware is used on all requests, unless specified otherwise.
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
+app.use('/static', express.static('public'));
 
 // --- Routes ---
 const mainRoutes = require('./routes');
