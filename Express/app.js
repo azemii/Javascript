@@ -22,7 +22,6 @@ app.use('/cards', cardRoutes);
 
 app.use((req, res, next) => {
     req.message = 'This message made it';
-    console.log('Hello');
     // Since we don't send anything back to the client here, with res.send, or res.render
     // we have to call next(). Next lets Express know that this middleware is done, and
     // it should continune down the line to the next middleware and run that code.
@@ -31,8 +30,6 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
-    console.log(req.message);
-    console.log('World');
     next();
 });
 /*
