@@ -1,0 +1,12 @@
+To run the application in debugging mode you must first create a 'launch.json' file
+using the debugging editor in VSCode. 
+
+These are the settings used.
+  "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "program": "${workspaceFolder}/Debugging/bin/www"
+        }
+    ]   
