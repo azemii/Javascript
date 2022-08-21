@@ -59,6 +59,9 @@ app.post('/quotes', async (req, res) => {
     
 });
 
+/**
+ * Updates exsisting quote with a new author and quote
+ */
 app.put('/quotes/:id', async (req, res) => {
     const id = req.params.id;
     const updatedQuote = req.body.quote;
@@ -77,6 +80,26 @@ app.put('/quotes/:id', async (req, res) => {
             res.status(404).json({ message: 'Quote not found with id of: ' + id });
         }
         
+    } catch (err) {
+        res.status(500).json( {message: err.message} );
+    }
+});
+
+/**
+ * Deletes a specific quote from the database.
+ */
+app.delete('/quotes/:id', async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const quote = await records.getQuote(id);
+        if (quote){
+            await records.deleteQuote(quote);
+            res.status(204).end();
+        } else {
+            console.log('not found, DEL');
+            res.status(404).json({ message: 'Quote not found with id of: ' + id });
+        }
     } catch (err) {
         res.status(500).json( {message: err.message} );
     }
