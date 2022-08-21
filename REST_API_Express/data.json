@@ -1,0 +1,39 @@
+{
+  "records": [
+    {
+      "id": 8721,
+      "quote": "We must accept finite disappointment, but we must never lose infinite hope.",
+      "author": "Martin Luther King"
+    },
+    {
+      "id": 5779,
+      "quote": "Use what you’ve been through as fuel, believe in yourself and be unstoppable!",
+      "author": "Yvonne Pierre"
+    },
+    {
+      "id": 3406,
+      "quote": "To succeed, you have to do something and be very bad at it for a while. You have to look bad before you can look really good.",
+      "author": "Barbara DeAngelis"
+    },
+    {
+      "id": 360,
+      "quote": "Jag ska ta han, inte polisen ska ta han.",
+      "author": "Lasterturken"
+    },
+    {
+      "quote": "You either die a hero or live long enough to see yourself become the villain",
+      "author": "Two Face",
+      "id": 9195
+    },
+    {
+      "quote": "A Hero Can Be Anyone, Even Someone Doing Something As Simple And Reassuring As Putting A Coat Around A Little Boy's Shoulders To Let Him Him Know The World Hadn't Ended",
+      "author": "Batman",
+      "id": 1255
+    },
+    {
+      "quote": "It's not who I am underneath but what I do that defines me",
+      "author": "Batman",
+      "id": 595
+    }
+  ]
+}
